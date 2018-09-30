@@ -37,4 +37,24 @@ class LibraryTest < Minitest::Test
     assert_instance_of Array, @dpl.books
     assert_equal [@jane_eyre, @mockingbird, @villette], @dpl.books
   end
+
+  def test_it_can_check_if_book_is_included_in_collection
+    @dpl.add_to_collection(@jane_eyre)
+    @dpl.add_to_collection(@mockingbird)
+    @dpl.add_to_collection(@villette)
+
+    assert @dpl.include?("To Kill a Mockingbird")
+    refute @dpl.include?("A Connecticut Yankee in King Arthur's Court")
+  end
+
+  def test_it_can_alphabetize_by_author_last_name
+    @dpl.add_to_collection(@jane_eyre)
+    @dpl.add_to_collection(@mockingbird)
+    @dpl.add_to_collection(@villette)
+    alpha_books = @dpl.card_catalogue
+
+    assert_equal "Bronte", alpha_books.first.author_last_name
+    assert_equal "Lee", alpha_books.last.author_last_name
+  end
+
 end
