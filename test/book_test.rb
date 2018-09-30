@@ -18,6 +18,10 @@ class BookTest < Minitest::Test
     assert_equal "Lee", @book.author_last_name
   end
 
+  def test_it_has_author_full_name
+    assert_equal "Harper Lee", @book.author_full_name
+  end
+
   def test_it_can_have_a_different_author
     book_with_different_author = Book.new({author_first_name: "Sara", author_last_name: "Maas", title: "Throne of Glass", publication_date: "July 11, 1960"})
 

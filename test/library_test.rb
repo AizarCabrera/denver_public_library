@@ -57,4 +57,29 @@ class LibraryTest < Minitest::Test
     assert_equal "Lee", alpha_books.last.author_last_name
   end
 
+  def test_it_can_find_by_author
+    @dpl.add_to_collection(@jane_eyre)
+    @dpl.add_to_collection(@mockingbird)
+    @dpl.add_to_collection(@villette)
+    actual   = @dpl.find_by_author("Charlotte Bronte")
+    expected = {
+      "Jane Eyre" => @jane_eyre,
+      "Villette"  => @villette
+    }
+
+    assert_instance_of Hash, actual
+    assert_equal expected, actual
+  end
+
+  def test_it_can_find_by_publication_date
+    @dpl.add_to_collection(@jane_eyre)
+    @dpl.add_to_collection(@mockingbird)
+    @dpl.add_to_collection(@villette)
+    actual   = @dpl.find_by_publication_date("1960")
+    expected = {"To Kill a Mockingbird" => @mockingbird}
+
+    assert_instance_of Hash, actual
+    assert_equal expected, actual
+  end
+
 end
